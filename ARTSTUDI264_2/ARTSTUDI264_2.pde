@@ -6,6 +6,16 @@ Capture video;
 OpenCV opencv;
 int SCALE = 4;
 
+/* TODOS: 
+ * !! 1 and 2 are both math ugh
+ * 1. fix blur to work with scale
+ * 2. flip image
+ * 
+ * 3. facial recognition (person-specific)
+ * 4. annotations
+ * 5. database things
+ */
+
 void setup() {   
   fullScreen();
   video = new Capture(this, width/SCALE, height/SCALE);
@@ -51,8 +61,8 @@ class BlurBox {
     noStroke();
     noFill();
     // TODO: FIX BLUR BOX VIDEO SAMPLE AREA TO COORDINATE WITH SCALE
-    blurred = get(x, y, w, h);
-    blurred.filter(BLUR, 5);
+    blurred = get(x + (width - x)/SCALE, y+ (height - y)/SCALE, w, h);
+    blurred.filter(BLUR, 1);
     image(blurred, x, y);
     rect(x, y, w, h);
   }
