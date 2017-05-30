@@ -1,3 +1,15 @@
+/* CITATIONS:
+ * https://gist.github.com/neufuture/1975615
+ * https://github.com/atduskgreg/opencv-processing/blob/master/examples/LiveCamTest/LiveCamTest.pde
+ * 
+ * USEFUL LINKS:
+ * http://atduskgreg.github.io/opencv-processing/reference/gab/opencv/OpenCV.html
+ * https://processing.org/reference/filter_.html
+ * https://forum.processing.org/two/discussion/9309/how-to-flip-image
+ * https://github.com/atduskgreg/opencv-processing/tree/master/lib
+ *
+ */
+
 import gab.opencv.*;
 import processing.video.*;
 import java.awt.*;
