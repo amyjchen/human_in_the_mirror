@@ -39,19 +39,24 @@ void setup() {
 
 void draw() {
   opencv.loadImage(video);
-  scale(-SCALE,SCALE); 
-  image(video, -width/SCALE, 0 );
+  
 
   noFill();
   Rectangle[] faces = opencv.detect();
   println(faces.length);
-
-  BlurBox bb[] = new BlurBox[faces.length];
-  for (int i = 0; i < faces.length; i++) {
-    println(faces[i].x + "," + faces[i].y);
-    bb[i] = new BlurBox(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-    println(bb[i].x, bb[i].y, bb[i].w, bb[i].h);
-    bb[i].display();
+  if(faces.length == 0) {
+    fill(0, 80);
+    rect(0, 0, width, height);
+  } else {
+    scale(-SCALE,SCALE); 
+    image(video, -width/SCALE, 0 );
+    BlurBox bb[] = new BlurBox[faces.length];
+    for (int i = 0; i < faces.length; i++) {
+      println(faces[i].x + "," + faces[i].y);
+      bb[i] = new BlurBox(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+      println(bb[i].x, bb[i].y, bb[i].w, bb[i].h);
+      bb[i].display();
+    }
   }
 }
 
