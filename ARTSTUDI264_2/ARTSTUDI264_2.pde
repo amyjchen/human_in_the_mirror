@@ -17,6 +17,7 @@ import java.awt.*;
 Capture video;
 OpenCV opencv;
 int SCALE = 4;
+int BLUR_INTENSITY = 10;
 
 /* TODOS: 
  * !! 1 and 2 are both math ugh
@@ -37,9 +38,9 @@ void setup() {
 }
 
 void draw() {
-  scale(SCALE);
   opencv.loadImage(video);
-  image(video, 0, 0 );
+  scale(-SCALE,SCALE); 
+  image(video, -width/SCALE, 0 );
 
   noFill();
   Rectangle[] faces = opencv.detect();
@@ -49,6 +50,7 @@ void draw() {
   for (int i = 0; i < faces.length; i++) {
     println(faces[i].x + "," + faces[i].y);
     bb[i] = new BlurBox(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+    println(bb[i].x, bb[i].y, bb[i].w, bb[i].h);
     bb[i].display();
   }
 }
@@ -70,12 +72,10 @@ class BlurBox {
   }
 
   void display() {
-    noStroke();
-    noFill();
-    // TODO: FIX BLUR BOX VIDEO SAMPLE AREA TO COORDINATE WITH SCALE
-    blurred = get(x + (width - x)/SCALE, y+ (height - y)/SCALE, w, h);
-    blurred.filter(BLUR, 1);
-    image(blurred, x, y);
-    rect(x, y, w, h);
+    
+    blurred = get(width - x*SCALE - w*SCALE, y*SCALE, w*SCALE, h*SCALE);
+    blurred.filter(BLUR, BLUR_INTENSITY);
+    image(blurred, -(width/SCALE - x), y, w, h);
+    
   }
 }
