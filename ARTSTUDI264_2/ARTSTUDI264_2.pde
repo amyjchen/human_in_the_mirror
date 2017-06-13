@@ -16,8 +16,8 @@ import java.awt.*;
 
 Capture video;
 OpenCV opencv;
-int SCALE = 4;
-int BLUR_INTENSITY = 10;
+int SCALE = 10;
+int BLUR_INTENSITY = 20;
 
 /* TODOS: 
  * !! 1 and 2 are both math ugh
@@ -29,9 +29,10 @@ int BLUR_INTENSITY = 10;
  * 5. database things
  */
 
-void setup() {   
-  fullScreen();
-  video = new Capture(this, width/SCALE, height/SCALE);
+void setup() { 
+  String[] cameras = Capture.list();
+  size(3200, 2000);
+  video = new Capture(this, width/SCALE, height/SCALE, "name=Logitech Camera,size=1920x1080,fps=30");
   opencv = new OpenCV(this, width/SCALE, height/SCALE);
   opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
   video.start();
